@@ -1,26 +1,17 @@
 {
   "name": "blogs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GiapThan/danggiapthan_blog.git"
-  },
   "keywords": [
     "danggiapthan"
   ],
   "author": "danggiapthan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GiapThan/danggiapthan_blog/issues"
-  },
-  "homepage": "https://github.com/GiapThan/danggiapthan_blog#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
@@ -30,5 +21,6 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0"
-  }
+  },
+  "description": ""
 }
