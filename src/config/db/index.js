@@ -5,9 +5,9 @@ async function connect() {
             useNewUrlParser : true,
             useUnifiedTopology: true,
         })
-        console.log('oke dc roi')
+        console.log('connect success')
     } catch (error) {
-        console.log('khong dc roi')
+        console.log('Connection failed')
     }
 }
 

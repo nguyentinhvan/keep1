@@ -18,11 +18,14 @@ app.use(express.json())
 //app.use(morgan('dev'))
 
 app.engine('hbs', handlebars({
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: {
+        sum: (a,b) => a+b
+    },
 }))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'src','resources','views'))
 
 route(app)
 
-app.listen(process.env.PORT || port)
+app.listen(process.env.PORT || port, ()=> {console.log("Start server success")})

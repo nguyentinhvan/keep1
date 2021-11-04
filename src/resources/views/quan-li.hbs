@@ -1,0 +1,33 @@
+<div class="mt-4">
+    <h3>QUẢN LÝ CHƯƠNG TRÌNH</h3>
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="col-2">Tên chương trình</th>
+                <th scope="col" class="col-4">Mô tả</th>
+                <th scope="col">Liên kết</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tùy chọn</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each infors}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.link}}</td>
+                <td>{{this.img}}</td>
+                <td>
+                    <a style="text-decoration: none;" class="btn btn-link" href="/acdm/chinh-sua/{{this._id}}">Sửa</a>
+                    <a style="text-decoration: none;" class="btn btn-link" href="/acdm/chinh-sua">Xóa</a>
+                </td>
+            </tr> 
+            {{/each}}
+            
+
+        </tbody>
+    </table>
+</div>
