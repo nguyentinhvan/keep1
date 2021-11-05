@@ -4,6 +4,7 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const route = require('./src/routes')
 const db = require('./src/config/db')
+var methodOverride = require('method-override')
 
 db.connect()
 
@@ -16,6 +17,8 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 //app.use(morgan('dev'))
+
+app.use(methodOverride('_method'))
 
 app.engine('hbs', handlebars({
     extname: '.hbs',

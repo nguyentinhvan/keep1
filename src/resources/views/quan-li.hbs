@@ -22,7 +22,7 @@
                 <td>{{this.img}}</td>
                 <td>
                     <a style="text-decoration: none;" class="btn btn-link" href="/acdm/chinh-sua/{{this._id}}">Sửa</a>
-                    <a style="text-decoration: none;" class="btn btn-link" href="/acdm/chinh-sua">Xóa</a>
+                    <a style="text-decoration: none;" class="btn btn-link" href="/acdm/delete" data-bs-toggle="modal" data-bs-target="#hoi" data-id="{{this._id}}">Xóa</a>
                 </td>
             </tr> 
             {{/each}}
@@ -31,3 +31,49 @@
         </tbody>
     </table>
 </div>
+{{! -----}}
+<div class="modal mt-4" tabindex="-1" id="hoi">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thông báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn xóa bỏ không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" id="btn-delete">Xóa chương trình</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! --- hiden}}
+<form method="POST" id="frm-delete"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded' ,function() {
+        var id
+        var delForm = document.getElementById('frm-delete')
+        
+        var hoi = document.getElementById('hoi')
+        hoi.addEventListener('show.bs.modal', function (event) {
+
+            var button = event.relatedTarget
+
+            id = button.getAttribute('data-id')
+            console.log(id)
+            })
+
+        var btnDelete = document.getElementById('btn-delete')
+        btnDelete.onclick = function() {
+            console.log(delForm)
+            delForm.action = '/acdm/' + id + '?_method=DELETE'
+            delForm.submit()
+        }
+        
+    })
+    
+</script>
