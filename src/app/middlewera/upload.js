@@ -3,13 +3,13 @@ const fs = require('fs')
 
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
-        cb(null, 'shopping-online-withme.herokuapp.com/src/public/imgs')
+        cb(null, `${__dirname}/../../public/imgs`)
     },
     filename: (req, file, cb) => {
 
         // Delete image when has req.query.change
         if (req.query.change) {
-            fs.unlink(`shopping-online-withme.herokuapp.com/src/public/imgs/${req.query.name}`, (err) => {})
+            fs.unlink(`${__dirname}/../../public/imgs/${req.query.name}`, (err) => {})
         }
 
         var name = Date.now() + '.' + file.originalname.split('.')[1]
