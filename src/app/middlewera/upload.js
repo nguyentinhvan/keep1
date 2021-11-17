@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
 
         // Delete image when has req.query.change
         if (req.query.change) {
-            fs.unlink(`src/public/imgs/${req.query.name}`, (err) => {})
+            fs.unlink(`./src/public/imgs/${req.query.name}`, (err) => {})
         }
 
         var name = Date.now() + '.' + file.originalname.split('.')[1]
