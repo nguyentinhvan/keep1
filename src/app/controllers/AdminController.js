@@ -1,4 +1,5 @@
-
+const path = require('path')
+const mainpath = path.dirname(require.main.filename)
 const Infor = require('../models/Infor')
 const fs = require('fs')
 const { mutipleMongooseToObject } = require('../../utill/mongoose')
@@ -20,10 +21,9 @@ class AdminController {
         Promise.all([Infor.findById({_id : req.params.id}), Infor.deleteOne({_id : req.params.id})])
         
             .then(([ele, delEle]) => {
-                console.log(ele)
                 try {
-                    if (fs.existsSync(`${__dirname}/../../public/imgs/${ele.nameimg}`)) {
-                        fs.unlink(`${__dirname}/../../public/imgs/${ele.nameimg}`, (err) => {}) 
+                    if (fs.existsSync(`${mainpath}/src/public/imgs/${ele.nameimg}`)) {
+                        fs.unlink(`${mainpath}/src/public/imgs/${ele.nameimg}`, (err) => {}) 
                     }
                 } catch (error) {
                     console.log(error)

@@ -33,6 +33,4 @@ app.set('views', path.join(__dirname, 'src','resources','views'))
 
 route(app)
 
-console.log(path.dirname(require.main.filename))
-
 app.listen(process.env.PORT || port, ()=> {console.log("Start server success")})
