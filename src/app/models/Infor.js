@@ -6,7 +6,7 @@ const Infor = new Schema({
     description: { type: String },
     link: { type: String},
     image: {type: String},  //data: Buffer, contentType
-    nameimg: { type: String},
+    nameimg: { type: String, default:''},
   }, {timestamps: true});
 
 module.exports = new mongoose.model('Infor', Infor)

@@ -20,10 +20,15 @@ class AdminController {
         Promise.all([Infor.findById({_id : req.params.id}), Infor.deleteOne({_id : req.params.id})])
         
             .then(([ele, delEle]) => {
-
-                if (fs.existsSync(`src/public/imgs/${ele.nameimg}`)) {
-                    fs.unlink(`src/public/imgs/${ele.nameimg}`, (err) => {}) 
+                console.log(ele)
+                try {
+                    if (fs.existsSync(`./src/public/imgs/${ele.nameimg}`)) {
+                        fs.unlink(`./src/public/imgs/${ele.nameimg}`, (err) => {}) 
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
+                
                 res.redirect('back')
             })
             .catch(next)
