@@ -22,8 +22,8 @@ class AdminController {
             .then(([ele, delEle]) => {
                 console.log(ele)
                 try {
-                    if (fs.existsSync(`./src/public/imgs/${ele.nameimg}`)) {
-                        fs.unlink(`./src/public/imgs/${ele.nameimg}`, (err) => {}) 
+                    if (fs.existsSync(`shopping-online-withme.herokuapp.com/src/public/imgs/${ele.nameimg}`)) {
+                        fs.unlink(`shopping-online-withme.herokuapp.com/src/public/imgs/${ele.nameimg}`, (err) => {}) 
                     }
                 } catch (error) {
                     console.log(error)
