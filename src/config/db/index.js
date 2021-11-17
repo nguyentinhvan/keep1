@@ -1,12 +1,16 @@
 const mongoose = require('mongoose')
 async function connect() {
     try {
-        await mongoose.connect('mongodb+srv://danggiapthan:danggiapthan@cluster0.gpavr.mongodb.net/infors?retryWrites=true', {
+        // accs: myblog
+        //infors: shopping
+        const con = await mongoose.connect('mongodb+srv://danggiapthan:danggiapthan@cluster0.gpavr.mongodb.net/infors?retryWrites=true', {
             useNewUrlParser : true,
             useUnifiedTopology: true,
         })
-        console.log('connect success')
+        //dotenv multer multer-gridfs-storage gridfs-stream
+        console.log(con.connection.host)
     } catch (error) {
+        console.log(error)
         console.log('Connection failed')
     }
 }

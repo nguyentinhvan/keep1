@@ -7,7 +7,7 @@
     </div>
 
     <h3 class="mt-3">ĐĂNG CHƯƠNG TRÌNH</h3>
-    <form method="POSt" action="/acdm/store">
+    <form method="POSt" action="/acdm/store" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="name" class="form-label">Tên chương trình</label>
             <input type="text" class="form-control" name="name">
@@ -20,13 +20,10 @@
             <label for="link" class="form-label">Liên kết</label>
             <input type="text" class="form-control" name="link">
         </div>
+        
         <div class="mb-3">
             <label for="img" class="form-label">Hình ảnh liên quan</label>
-            <input type="text" class="form-control" name="img">
-        </div>
-        <div class="mb-3">
-            <label for="slug" class="form-label">URL trang chi tiết</label>
-            <input type="text" class="form-control" name="slug">
+            <input type="file" class="form-control" name="img">
         </div>
         <button type="submit" class="btn btn-primary">Đăng</button>
 </form>

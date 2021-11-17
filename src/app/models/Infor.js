@@ -5,8 +5,8 @@ const Infor = new Schema({
     name: { type: String },
     description: { type: String },
     link: { type: String},
-    img: { type: String},
-    slug: { type: String},
+    image: {type: String},  //data: Buffer, contentType
+    nameimg: { type: String},
   }, {timestamps: true});
 
-module.exports = mongoose.model('Infor', Infor)
+module.exports = new mongoose.model('Infor', Infor)

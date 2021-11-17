@@ -4,11 +4,11 @@
         {{#each infors}}
         <div class="col-sm-6 col-lg-4" style="margin-top: 20px;">
             <div class="card">
-                <a href="/progr/{{this.slug}}">
-                    <img src="{{this.img}}" class="card-img-top" title="{{this.name}}">
-                </a>
+
+                <img src="/imgs/{{this.nameimg}}" class="card-img-top" title="{{this.name}}">
+
                 <div class="card-body">
-                    <a href="/progr/{{this.slug}}">
+                    <a href="/progr/{{this.link}}">
                         <h5 class="card-title">{{this.name}}</h5>
                     </a>
                     <p class="card-text">{{this.description}}</p>
