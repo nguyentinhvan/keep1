@@ -16,19 +16,26 @@ class AdminController {
             .catch(next)
     }
 
-    // DELETE 
+    // DELETE soft
     delete(req, res, next) {
-        Promise.all([Infor.findById({_id : req.params.id}), Infor.deleteOne({_id : req.params.id})])
-        
+        Infor.delete({ _id: req.params.id})
+            .then(() => {
+                res.redirect('back')
+            })
+            .catch(next)
+    }
+
+    // DELETE FORCE
+    deleteForce(req, res, next) {
+        Promise.all([Infor.findDeleted({_id : req.params.id}), Infor.deleteOne({_id : req.params.id})])
             .then(([ele, delEle]) => {
                 try {
-                    if (fs.existsSync(`${mainpath}/src/public/imgs/${ele.nameimg}`)) {
-                        fs.unlink(`${mainpath}/src/public/imgs/${ele.nameimg}`, (err) => {}) 
+                    if (fs.existsSync(`${mainpath}/src/public/imgs/${ele[0].nameimg}`)) {
+                        fs.unlink(`${mainpath}/src/public/imgs/${ele[0].nameimg}`, (err) => {}) 
                     }
                 } catch (error) {
                     console.log(error)
                 }
-                
                 res.redirect('back')
             })
             .catch(next)
@@ -36,11 +43,15 @@ class AdminController {
 
     // VIEW
     quanli(req, res, next) {
-        Infor.find({})
-            .then(infors => {
-                res.render('quan-li', {infors: mutipleMongooseToObject(infors)})
+        Promise.all([Infor.find({}), Infor.findDeleted({}), Infor.countDocumentsDeleted()])
+            .then(([fi, fd, countDel]) => {
+                res.render('quan-li', {
+                    inffin: mutipleMongooseToObject(fi),
+                    infdel: mutipleMongooseToObject(fd),
+                    countDel,
+                })    
             })
-            .catch(next)
+            .catch(() => {})
     }
     
     // RENDER UpDate

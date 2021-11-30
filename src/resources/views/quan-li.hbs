@@ -1,6 +1,51 @@
 <div class="mt-4">
-    <h3>QUẢN LÝ CHƯƠNG TRÌNH</h3>
+    <button id="btn-tras" type="button" class="btn btn-primary position-relative mt-4">
+    Thùng rác
+    <span id="hieu" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+      {{countDel}}
+    </span>
+    </button>
 
+    <div id="tras"  class="mt-4" style="display: none;">
+
+      <h4>Thùng rác</h4>
+      <table class="table mt-4">
+
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" class="col-2">Tên chương trình</th>
+            <th scope="col" class="col-4">Mô tả</th>
+            <th scope="col">Liên kết</th>
+            <th scope="col">Tùy chọn</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each infdel}}
+          <tr class="row-del">
+            <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.link}}</td>
+            <td>
+                <button data-id="{{this._id}}" type="button" class="btn btn-khoiphuc">Khôi phục</button>
+                <button data-id="{{this._id}}" type="button" class="btn btn-delforce">Xóa vĩnh viễn</button>
+            </td>
+          </tr> 
+          {{else}}
+          <tr class="text-center">
+            <td colspan="6">Thùng rác trống</td>
+          </tr>
+          {{/each}}
+            
+
+        </tbody>
+
+      </table>
+
+    </div>
+  {{!---------------}}
+    <h3 class="mt-4">QUẢN LÝ CHƯƠNG TRÌNH</h3>
     <table class="table mt-4">
         <thead>
             <tr>
@@ -12,7 +57,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#each infors}}
+            {{#each inffin}}
             <tr>
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
@@ -50,28 +95,44 @@
 
 {{! --- hiden}}
 <form method="POST" id="frm-delete"></form>
+<form method="POST" id="frm-delfor"></form>
 
 <script>
     document.addEventListener('DOMContentLoaded' ,function() {
         var id
         var delForm = document.getElementById('frm-delete')
-        
+        var delForForm = document.getElementById('frm-delfor')
+        var btnTras = document.getElementById('btn-tras')
+        var tras = document.getElementById('tras')
+        ////////////
+        btnTras.onclick = () => {
+          if (tras.hasAttribute('style')) {
+            tras.removeAttribute('style')
+          }
+          else { tras.setAttribute('style', 'display: none;') }
+        }
+        ////// VIEW MODAL
         var hoi = document.getElementById('hoi')
         hoi.addEventListener('show.bs.modal', function (event) {
-
-            var button = event.relatedTarget
-
-            id = button.getAttribute('data-id')
-            console.log(id)
-            })
-
+          var button = event.relatedTarget
+          id = button.getAttribute('data-id')
+        })
+        ////////////delete force
+        var listBtnDeleteForce = [...document.getElementsByClassName('btn-delforce')]
+        console.log(listBtnDeleteForce)
+        listBtnDeleteForce.forEach((e) => {
+          e.onclick = function() {
+            console.log(e.getAttribute('data-id'))
+            delForForm.action = '/acdm/force/' + e.getAttribute('data-id') + '?_method=DELETE'
+            delForForm.submit()
+          }
+        })
+        ///////////DEL SOFT
         var btnDelete = document.getElementById('btn-delete')
         btnDelete.onclick = function() {
-            console.log(delForm)
             delForm.action = '/acdm/' + id + '?_method=DELETE'
             delForm.submit()
         }
-        
     })
     
 </script>

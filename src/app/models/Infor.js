@@ -1,12 +1,18 @@
 const mongoose = require('mongoose')
+const mongooseDelete = require('mongoose-delete')
 const Schema = mongoose.Schema
 
 const Infor = new Schema({
     name: { type: String },
     description: { type: String },
     link: { type: String},
-    image: {type: String},  //data: Buffer, contentType
-    nameimg: { type: String, default:''},
+    nameimg: { type: String},
   }, {timestamps: true});
 
-module.exports = new mongoose.model('Infor', Infor)
+Infor.plugin(mongooseDelete, {
+  deleteAt: true,
+  overrideMethods: 'all',
+})
+  
+module.exports = UploadModel = mongoose.model('Infor', Infor)
+
