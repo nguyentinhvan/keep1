@@ -6,6 +6,13 @@ const { mutipleMongooseToObject } = require('../../utill/mongoose')
 
 class AdminController {
 
+    getin4(req, res, next) {
+        fetch('https://dang-giap-than.herokuapp.com/acdm/getdata')
+            .then(respon => {
+                console.log(respon)
+            })
+            .catch()
+    }
     // [PUT]
     updata(req, res, next) {
 

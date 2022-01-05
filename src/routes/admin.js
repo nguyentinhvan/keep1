@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 const adminController = require('../app/controllers/AdminController')
 
+router.get('/getin4', adminController.getin4)
+
 router.get('/quan-li', adminController.quanli)
 router.get('/chinh-sua/:id', adminController.chinhsua)
 router.put('/:id', upload.single('img') ,adminController.updata)

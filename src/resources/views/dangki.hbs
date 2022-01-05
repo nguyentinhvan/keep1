@@ -1,8 +1,8 @@
 <div class="mt-5">
     <div class="mt-4">
-        <a href="/dangki">Chưa có tài khoản</a>
+        <a href="/login">Đăng nhập</a>
     </div>
-    <form action="/login/post" method="POST" class="mt-4">
+    <form action="/dangki/post" method="POST" class="mt-4">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Tên đăng nhập</span>
             <input type="text" name="username" class="form-control" >
@@ -12,7 +12,11 @@
             <span class="input-group-text" id="inputGroup-sizing-default">Mật khẩu</span>
             <input type="password" name="password" class="form-control" >
         </div>
-            <button class="btn btn-primary" type="submit">Đăng nhập</button>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Nhập lại mật khẩu</span>
+            <input type="password" name="repassword" class="form-control" >
+        </div>
+            <button class="btn btn-primary" type="submit">Đăng ký</button>
     </form>
 </div>
 
