@@ -1,4 +1,5 @@
 const path = require('path')
+const imgur = require('imgur-uploader')
 const mainpath = path.dirname(require.main.filename)
 const Infor = require('../models/Infor')
 const fs = require('fs')
@@ -15,12 +16,38 @@ class AdminController {
     }
     // [PUT]
     updata(req, res, next) {
+        if (req.query.change) {
+            const file = req.files.img
+            file.mv(mainpath + '/src/image/' + file.name, (err) => {
+                if (err) {
+                    console.log('looix' + err)
+                }
+                else {
+                    imgur(fs.readFileSync(mainpath + '/src/image/' + file.name))
+                        .then(data => {
+                            req.body.nameimg = data.link
 
-        Infor.findOneAndUpdate( {_id : req.params.id} , req.body)
-            .then( () => {
-                res.redirect('/acdm/quan-li')
+                            Infor.findOneAndUpdate( {_id : req.params.id} , req.body)
+                                .then( () => {
+                                    console.log('aaa')
+                                })
+                                .catch(next)
+
+                            fs.unlinkSync(mainpath + '/src/image/' + file.name)
+                        })
+                        .catch()
+                }
             })
-            .catch(next)
+        }
+        else {
+            Infor.findOneAndUpdate( {_id : req.params.id} , req.body)
+                .then( () => {
+                    console.log('bbb')
+                })
+                .catch(next)
+        }
+        res.redirect('back')
+
     }
 
     // DELETE soft
@@ -75,8 +102,22 @@ class AdminController {
     }
 
     // creat new
-    store(req, res, next){       
-        Infor.create(req.body)
+    store(req, res, next){
+        const file = req.files.img
+        file.mv(mainpath + '/src/image/' + file.name, (err) => {
+            if (err) {
+                console.log('looix' + err)
+            }
+            else {
+                imgur(fs.readFileSync(mainpath + '/src/image/' + file.name))
+                    .then(data => {
+                        req.body.nameimg = data.link
+                        Infor.create(req.body)
+                        fs.unlinkSync(mainpath + '/src/image/' + file.name)
+                    })
+                    .catch()
+            }
+        })
         res.redirect('back')
     }    
     
