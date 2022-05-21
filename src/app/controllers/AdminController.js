@@ -4,6 +4,13 @@ const mainpath = path.dirname(require.main.filename)
 const Infor = require('../models/Infor')
 const fs = require('fs')
 const { mutipleMongooseToObject } = require('../../utill/mongoose')
+const cloudinary = require('cloudinary')
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+})
 
 class AdminController {
 
@@ -103,25 +110,42 @@ class AdminController {
 
     // creat new
     store(req, res, next){
-        console.log(typeof req.body)
         const file = req.files.img
-        file.mv(mainpath + '/src/image/' + file.name, (err) => {
-            if (err) {
-                console.log('looix' + err)
-            }
-            else {
-                imgur(fs.readFileSync(mainpath + '/src/image/' + file.name))
-                    .then(data => {
-                        req.body.nameimg = data.link
-                        Infor.create(req.body)
-                        fs.unlinkSync(mainpath + '/src/image/' + file.name)
+        console.log(file.mimetype)
+        if (file.mimetype.includes('video')) {
+
+            file.mv(mainpath + '/src/' + file.name)
+                .then(() => {
+                    return cloudinary.v2.uploader.upload(mainpath + '/src/' + file.name, {
+                        resource_type: "video",
+                        overwrite: true,
                     })
-                    .catch()
-            }
-        })/* 
-        res.redirect('back') */
+                })
+                .then(r => {
+                    fs.unlinkSync(mainpath+'/src/' + file.name)
+                    console.log(r.url)
+                })
+                .catch(e=> console.log(e))
+        }
+        if (file.mimetype.includes('image')) {
+
+            file.mv(mainpath + '/src/' + file.name, (err) => {
+                if (err) {
+                    console.log('looix' + err)
+                }
+                else {
+                    imgur(fs.readFileSync(mainpath + '/src/' + file.name))
+                        .then(data => {
+                            req.body.nameimg = data.link
+                            Infor.create(req.body)
+                            fs.unlinkSync(mainpath + '/src/' + file.name)
+                        })
+                        .catch()
+                }
+            })
+        }
+        res.redirect('back')
     }    
-    
 }
 
 module.exports = new AdminController

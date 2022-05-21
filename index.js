@@ -25,7 +25,6 @@ app.engine('hbs', handlebars({
     extname: '.hbs',
     helpers: {
         sum: (a,b) => a+b,
-        convert: (item) => {item.toString('base64')}
     },
 
 }))
