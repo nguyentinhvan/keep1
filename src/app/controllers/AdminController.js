@@ -103,6 +103,7 @@ class AdminController {
 
     // creat new
     store(req, res, next){
+        console.log(typeof req.body)
         const file = req.files.img
         file.mv(mainpath + '/src/image/' + file.name, (err) => {
             if (err) {
@@ -117,8 +118,8 @@ class AdminController {
                     })
                     .catch()
             }
-        })
-        res.redirect('back')
+        })/* 
+        res.redirect('back') */
     }    
     
 }
