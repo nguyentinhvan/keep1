@@ -114,18 +114,21 @@ class AdminController {
         console.log(file.mimetype)
         if (file.mimetype.includes('video')) {
 
-            file.mv(mainpath + '/src/' + file.name)
-                .then(() => {
-                    return cloudinary.v2.uploader.upload(mainpath + '/src/' + file.name, {
+            file.mv(mainpath + '/src/' + file.name, (err) => {
+                if (err) { console.log(err) }
+                else {
+                    cloudinary.v2.uploader.upload(mainpath + '/src/' + file.name, {
                         resource_type: "video",
                         overwrite: true,
+                    }, (err, result) => {
+                        if (err) { console.log(err) }
+                        else {
+                            fs.unlinkSync(mainpath+'/src/' + file.name)
+                            console.log(result.url)
+                        }
                     })
-                })
-                .then(r => {
-                    fs.unlinkSync(mainpath+'/src/' + file.name)
-                    console.log(r.url)
-                })
-                .catch(e=> console.log(e))
+                }
+            })
         }
         if (file.mimetype.includes('image')) {
 

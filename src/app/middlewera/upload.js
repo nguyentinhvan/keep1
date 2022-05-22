@@ -1,4 +1,4 @@
-const multer = require('multer')
+/* const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 const mainpath = path.dirname(require.main.filename)
@@ -20,4 +20,4 @@ const storage = multer.diskStorage({
     },
 })
 
-module.exports = multer({storage: storage})
+module.exports = multer({storage: storage}) */

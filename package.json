@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,6 @@
   "author": "danggiapthan",
   "license": "ISC",
   "dependencies": {
-    "bootstrap-icons": "^1.7.0",
     "cloudinary": "^1.30.0",
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
