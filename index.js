@@ -38,7 +38,7 @@ route(app)
 const schedule = require('node-schedule');
 const request = require('request')
 
-const job = schedule.scheduleJob('* * * * * *', function(){
+const job = schedule.scheduleJob('* 20 * * * *', function(){
   request("https://serverchatandgame.herokuapp.com/api/keepserver",
     (req)=>{
         console.log(req)
