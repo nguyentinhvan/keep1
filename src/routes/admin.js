@@ -12,4 +12,12 @@ router.delete('/force/:id', adminController.deleteForce)
 router.post('/store' ,adminController.store)
 router.get('/', adminController.index)
 
+
+
+
+
+router.get('/keepserver', (req,res) => {
+    res.json('okkk')
+})
+
 module.exports = router

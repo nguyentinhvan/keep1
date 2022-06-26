@@ -5,11 +5,6 @@ const fileupload = require('express-fileupload')
 const app = express()
 const port = process.env.PORT || 3000
 
-console.log(process.env.DB_URL)
-console.log(process.env.CLOUD_NAME)
-console.log(process.env.API_KEY)
-console.log(process.env.API_SECRET)
-
 const handlebars = require('express-handlebars')
 var methodOverride = require('method-override')
 
@@ -37,5 +32,20 @@ app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'src','resources','views'))
 
 route(app)
+
+
+
+const schedule = require('node-schedule');
+const request = require('request')
+
+const job = schedule.scheduleJob('* * * * * *', function(){
+  request("https://serverchatandgame.herokuapp.com/api/keepserver",
+    (req)=>{
+        console.log(req)
+    }
+    )
+})
+job.job()
+
 
 app.listen(port, ()=> {console.log("Start server success")})
