@@ -15,7 +15,6 @@ router.get('/', adminController.index)
 
 
 
-
 router.get('/keepserver', (req,res) => {
     res.json('okkk')
 })

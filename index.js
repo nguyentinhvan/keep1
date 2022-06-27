@@ -34,18 +34,7 @@ app.set('views', path.join(__dirname, 'src','resources','views'))
 route(app)
 
 
-
-const schedule = require('node-schedule');
-const request = require('request')
-
-const job = schedule.scheduleJob('* 20 * * * *', function(){
-  request("https://serverchatandgame.herokuapp.com/api/keepserver",
-    (req)=>{
-        console.log(req)
-    }
-    )
-})
-job.job()
+const job = require('./src/utill/keepserver')
 
 
 app.listen(port, ()=> {console.log("Start server success")})
