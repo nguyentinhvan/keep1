@@ -32,6 +32,7 @@ app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'src','resources','views'))
 
 app.get('/api', (req,res) => {
+    console.log('okkkkkkkkkkk')
     res.send('okkkkkkkkkkkkk')
 })
 route(app)
