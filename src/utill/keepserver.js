@@ -2,7 +2,7 @@
 const schedule = require('node-schedule');
 const request = require('request')
 
-const job = schedule.scheduleJob('*/20 * * * *', function(){
+const job = schedule.scheduleJob('*/10 * * * *', function(){
     console.log('........gửi request.......')
    request(process.env.CLIENT_1,
     (err, res)=>{
